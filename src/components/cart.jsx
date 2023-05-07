@@ -25,7 +25,7 @@ function Cart() {
     <div >
       <Container  fluid style={{backgroundColor : "#212529",display:"flex",flexDirection:"column",alignItems:"center"}} className="p-2 position-fixed fixed-bottom">
         <p style={{color:"gray"}}>Subtotal <b>{subTotal.toFixed(3)}</b>{".OMR"}</p>
-        <Link to={enabled?"/form":"/"} style={{width:"70%" ,maxWidth:"500px"}}><Button disabled={!enabled} style={{width:"100%"}} variant='warning'>Proceed{badgeCount>0 ?<Badge bg='danger' className='ms-1'>{badgeCount}</Badge>:<></>}</Button></Link>
+        <Link to={enabled?"/form":"/cosweborder/"} style={{width:"70%" ,maxWidth:"500px"}}><Button disabled={!enabled} style={{width:"100%"}} variant='warning'>Proceed{badgeCount>0 ?<Badge bg='danger' className='ms-1'>{badgeCount}</Badge>:<></>}</Button></Link>
       </Container>
       <div style={{display:"flex" , justifyContent:"center"}}>
     <div style={{display:"flex",flexDirection:"column",alignItems:"stretch",gap:".1rem",paddingBottom:"6rem",maxWidth:"700px"}}>

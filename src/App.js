@@ -14,7 +14,7 @@ function App() {
     <Router>
       <NavBar/>
       <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/cosweborder/" element={<Home />} />
           <Route path="/cart" element={<Cart/>}/>
           <Route path="/form" element={<Form/>}/>
           <Route path="/success" element={<OrderSuccess/>}/>

@@ -20,7 +20,7 @@ function NavBar() {
         <Nav className='me-auto'>
         </Nav>
         <Nav>
-          <Nav.Link><Link to="/" style={{textDecoration:"none",color:"white"}}>Shop</Link></Nav.Link>
+          <Nav.Link><Link to="/cosweborder/" style={{textDecoration:"none",color:"white"}}>Shop</Link></Nav.Link>
           <Nav.Link> <Link to="/cart" style={{textDecoration:"none",color:"white"}}>Cart</Link></Nav.Link>
           
         </Nav>
