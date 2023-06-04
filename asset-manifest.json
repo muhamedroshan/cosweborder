@@ -1,15 +1,16 @@
 {
   "files": {
     "main.css": "/cosweborder/static/css/main.4a7ebac4.css",
-    "main.js": "/cosweborder/static/js/main.f62a580a.js",
+    "main.js": "/cosweborder/static/js/main.ee6e129b.js",
     "static/js/787.95f3b797.chunk.js": "/cosweborder/static/js/787.95f3b797.chunk.js",
     "index.html": "/cosweborder/index.html",
+    "static/media/getFetch.cjs": "/cosweborder/static/media/getFetch.40f37ddea2378391108f.cjs",
     "main.4a7ebac4.css.map": "/cosweborder/static/css/main.4a7ebac4.css.map",
-    "main.f62a580a.js.map": "/cosweborder/static/js/main.f62a580a.js.map",
+    "main.ee6e129b.js.map": "/cosweborder/static/js/main.ee6e129b.js.map",
     "787.95f3b797.chunk.js.map": "/cosweborder/static/js/787.95f3b797.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4a7ebac4.css",
-    "static/js/main.f62a580a.js"
+    "static/js/main.ee6e129b.js"
   ]
 }
