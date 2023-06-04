@@ -9,12 +9,28 @@ import {db} from "../firebaseConf"
 import { collection, getDoc,doc,getDocs} from "firebase/firestore"
 import { RestaurntConverter } from '../Restaurant'
 import { ProductsConverter } from '../Product'
+import LanguageModel from './LanguageModel'
+import { useTranslation } from 'react-i18next';
 
 function Home() {
-  const { listOfProducts,setListOfProducts,listOfFilteredProducts,setListFilterrdOfProducts,MyRest,setMyRest,stateSearch,badgeCount} = useContext(ShopContext)
+  const { 
+    listOfProducts,
+    setListOfProducts,
+    listOfFilteredProducts,
+    setListFilterrdOfProducts,
+    MyRest,
+    setMyRest,
+    stateSearch,
+    badgeCount,
+    modalShow,
+    setModalShow,
+    isLangDec,
+    setIsLanDec
+  } = useContext(ShopContext)
   const [listOfCategories , setListOfCategories] = useState([])
   const [params,setparams] = useSearchParams()
   const [loading, setLoading] = useState(false)
+  const { t, i18n } = useTranslation();
 
   useEffect(()=>{
     const tosetlistofcategories = listOfFilteredProducts.map(prodt=> prodt.productcategory)
@@ -47,17 +63,21 @@ function Home() {
         }).finally(()=>(setLoading(false)))
       }
     }
+    if(!isLangDec){
+      setModalShow(true)
+    }
     setUpProducts()
     setUp()
   },[])
   return (
     <div>
+      <LanguageModel show={modalShow} onHide={()=> setModalShow(false)}/>
     <SearchBox/>
     <div className='position-fixed' style={{bottom:"0" ,right:"0" ,zIndex:"100", marginBottom:"2rem", marginRight:"2rem"}}>
     <Link to="/cart">
     <Button variant="warning" size="lg" >
       <ShoppingCart size={35}/>
-      My Kart{badgeCount>0 ?<Badge bg='danger' className='ms-1'>{badgeCount}</Badge>:""}
+      {t('myKart')}{badgeCount>0 ?<Badge bg='danger' className='ms-1'>{badgeCount}</Badge>:""}
     </Button>
     </Link>
     </div>
@@ -89,7 +109,7 @@ function Home() {
         <p className='pt-2'>{MyRest.companyName}</p>
         <p>{MyRest.companyAddress}</p>
         <p>{MyRest.email}</p>
-        <p className='pb-1'>Powered By We Do</p>
+        <p className='pb-1'>{t('poweredBy')}</p>
       </footer>
     </div>
   )

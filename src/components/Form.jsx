@@ -1,5 +1,5 @@
 import React ,{useEffect ,useState ,useContext}from 'react'
-import { Container, Tab,Tabs, Button,Alert,Spinner} from 'react-bootstrap'
+import { Container, Tab,Tabs, Button,Alert,Spinner, Image} from 'react-bootstrap'
 import {  Link,useNavigate } from 'react-router-dom'
 import FormDriveThru from './FormDriveThru'
 import FormFromRest from './FormFromRest'
@@ -8,9 +8,11 @@ import ShopContext from '../context/ShopContext'
 import  {BellSimple,HouseSimple,Car,Table} from 'phosphor-react'
 import {db} from "../firebaseConf"
 import {  getDoc,doc,Timestamp,setDoc,updateDoc,increment} from "firebase/firestore"
-
+import { useTranslation } from 'react-i18next';
+import tableImg from '../images/table.png'
 
 function Form() {
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate()
   const [show, setShow] = useState(false);
   const {
@@ -26,13 +28,13 @@ function Form() {
     useEffect(()=>{
       switch (key) {
         case "Delivery":
-          setMessageError("Phone And Address Can't Be Empty")
+          setMessageError(t('errorMsgDl'))
           break;
         case "Drive":
-          setMessageError("Plate No Can't Be Empty")
+          setMessageError(t('errorMsgDr'))
           break;
         case "Inside":
-          setMessageError("Table Name Can't Be Empty")
+          setMessageError(t('errorMsgIn'))
           break;
         default:
           break;
@@ -87,7 +89,7 @@ function Form() {
     //Handle Order Click 
     async function handleOreder(){
       if (cartList.length === 0) {
-        setMessageError("Your Cart Is Empty,Order Cant Be Done With Empty Cart")
+        setMessageError(t('errorMsgCt'))
         setShow(true)
       }else{
       if (orderRef==="") {
@@ -99,7 +101,7 @@ function Form() {
           setProgress(false)
           navigateToSuccess()
         }else{
-          setMessageError("Order Failed Cant Connect")
+          setMessageError(t('errorMsgOd'))
           setShow(true)
           setProgress(false)
         }
@@ -115,7 +117,7 @@ function Form() {
     <div style={{overflowY: 'scroll',paddingBottom:"10rem"}}>
     { show ? 
       <Alert className='m-3' variant="danger" onClose={() => setShow(false)} dismissible>
-        <Alert.Heading>Oh snap! Order Failed!</Alert.Heading>
+        <Alert.Heading>{t('alertHd')}</Alert.Heading>
         <p>
           {messageError}
         </p>
@@ -123,7 +125,7 @@ function Form() {
     
   }
     <Container  fluid style={{backgroundColor : "#212529",display:"flex",flexDirection:"column",alignItems:"center"}} className="p-2 position-fixed fixed-bottom">
-        <p style={{color:"grey" , textAlign:"center"}}>Note : Select Appropriate Delivery Method From Home Delivery, Drive Thru, Inside Restaurant  </p>
+        <p style={{color:"grey" , textAlign:"center"}}>{t('orderNote')}</p>
         <Link to="" style={{width:"70%" ,maxWidth:"500px"}}>
           <Button style={{width:"100%"}} onClick={()=>{handleOreder()}} variant='warning' disabled={progress?true:false}>
           {progress?
@@ -134,9 +136,9 @@ function Form() {
               size="sm"
               role="status"
               aria-hidden="true"/>
-              Ordering...
+              {t('ordering')}
             </> :
-            <>Send Order <BellSimple size={20}/></>
+            <>{t('sendOrder')} <BellSimple size={20}/></>
           }
           </Button></Link>
       </Container>
@@ -148,16 +150,16 @@ function Form() {
       onSelect={(k) => setKey(k)}
       className="mb-3" 
     >
-      <Tab eventKey="Delivery" title="Home Delivery">
-        <Container style={{display:"flex",justifyContent:"center"}}><HouseSimple size={33}/></Container>
+      <Tab eventKey="Delivery" title={t('homeDelivery')}>
+        <Container style={{display:"flex",justifyContent:"center"}}><HouseSimple size={55}/></Container>
         <FormHomeDelivery></FormHomeDelivery>
       </Tab>
-      <Tab eventKey="Drive" title="Drive Thru">
-        <Container style={{display:"flex",justifyContent:"center"}}><Car size={33}/></Container>
+      <Tab eventKey="Drive" title={t('driveThru')}>
+        <Container style={{display:"flex",justifyContent:"center"}}><Car size={55}/></Container>
         <FormDriveThru></FormDriveThru>
       </Tab>
-      <Tab eventKey="Inside" title="Inside Restaurant">
-        <Container style={{display:"flex",justifyContent:"center"}}><Table size={33}/></Container>
+      <Tab eventKey="Inside" title={t('insideRest')}>
+        <Container style={{display:"flex",justifyContent:"center"}}><Image src={tableImg} height={55} width={55}/></Container>
         <FormFromRest></FormFromRest>
       </Tab>
     </Tabs>

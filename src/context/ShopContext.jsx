@@ -15,6 +15,8 @@ export function ShopContextProvider(props) {
     const [cartList,setCartList] = useState([])
     const [badgeCount,SetBadgeCount] = useState(0)
     const [key, setKey] = useState('Drive')
+    const [modalShow,setModalShow] = useState(false)
+    const [isLangDec,setIsLanDec] = useState(false)
     
     //use effect for initialization
     useEffect(()=>{
@@ -104,7 +106,11 @@ export function ShopContextProvider(props) {
         orderRef,
         setOrderRef,
         orderNote,
-        setOrderNote 
+        setOrderNote,
+        modalShow,
+        setModalShow,
+        isLangDec,
+        setIsLanDec 
       }
   return (
     <ShopContext.Provider value={contextValue}>
